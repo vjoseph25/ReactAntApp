@@ -13,6 +13,40 @@
   }
 }
 
+.ant-layout-header {
+  color: white;
+}
+
+section .ant-layout {
+  background-color: #f0f5ff;
+}
+
+.chartContainer {
+  width: 800px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartTitle {
+  margin-left: auto;
+  margin-right: 40%;
+}
+.ant-input {
+  width: 64px;
+}
+
+.ant-layout-content {
+  text-align: center;
+  min-height:250px;
+  margin-top: 64px;
+}
+
+.headerTitle {
+  width: 120px;
+  float: left;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
