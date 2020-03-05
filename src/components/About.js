@@ -1,11 +1,13 @@
 import React from "react";
+import warehouse from './warehouse.jpg';
 
 
 function About() {
     return (
         <div>
-            <p>An easy to use fitness tracker to keep you on track with your workout goals</p>
-            <p>Log your workouts in the app, and view historical progress to see how you are doing!</p>
+            <p>An easy to use order tracker to monitor your organization's operational performance</p>
+            <p>Log your orders in the app, view historical progress, and check on sales by location!</p>
+            <img src={warehouse} height='368' width='720'/>
         </div>
         
     );

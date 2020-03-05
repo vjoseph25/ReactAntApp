@@ -1,7 +1,7 @@
 import React from "react";
 import { message, Radio, InputNumber, Button, Form, DatePicker } from "antd";
 
-const options = ['Running', 'Biking', 'Weightlifting'];
+const options = ['Richmond', 'Columbus', 'Philadelphia'];
 const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -27,25 +27,23 @@ class Logger extends React.Component {
             }
             console.log("Received values of form: ", values);
             this.props.handleSubmit(values);
-            message.success('Your workout has been logged!');
+            message.success('Your shipment has been logged!');
         });
         
     };
-
-    
 
     render() {
         const { getFieldDecorator, number, type, object } = this.props.form;
         return(
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                <Form.Item label="Activity">
-                    {getFieldDecorator('Activity', {
-                        rules: [{ required: true, message: "Please select an activity!"}]
+                <Form.Item label="Location">
+                    {getFieldDecorator('Location', {
+                        rules: [{ required: true, message: "Please select a location!"}]
                     })(
                     <Radio.Group options={options} />)}
                 </Form.Item>
-                <Form.Item label="Number of minutes">
-                    {getFieldDecorator('Minutes', {
+                <Form.Item label="Number of orders">
+                    {getFieldDecorator('Orders', {
                         rule: [{ required: true, type: 'number', message: "Please enter a number!"}]
                     })(<InputNumber min={0} max={240}></InputNumber>)}
                 </Form.Item>
@@ -60,6 +58,6 @@ class Logger extends React.Component {
     }
 }
 
-const WrappedForm = Form.create({ name: 'fitness_form' })(Logger);
+const WrappedForm = Form.create({ name: 'delivery_form' })(Logger);
 
 export default WrappedForm;

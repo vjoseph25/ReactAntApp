@@ -4,7 +4,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 import Logger from './components/Logger';
 import History from './components/History';
 import About from './components/About';
-import logo from './logo.svg';
+import Locations from './components/Locations';
 import './App.css';
 import 'antd/dist/antd.css';
 
@@ -12,36 +12,41 @@ const {Header, Footer, Content} = Layout;
 class App extends React.Component {
   state = {
     current: 'logger',
-    value1: 'Running',
     series: [
       {
-        Activity: "Running",
+        id: "Richmond",
         data: [
-          {Minutes: 30, Date:'03/31/2020' },
-          {Minutes: 0, Date:'04/01/2020' },
-          {Minutes: 15, Date:'04/02/2020' }
+          {y: 33, x:'03/31/2020' },
+          {y: 21, x:'04/01/2020' },
+          {y: 48, x:'04/02/2020' }
         ],
         color: '#13c2c2'
       },
       {
-        Activity: "Biking",
+        id: "Columbus",
         data: [
-          {Minutes: 45, Date:'03/31/2020' },
-          {Minutes: 15, Date:'04/01/2020' },
-          {Minutes: 60, Date:'04/02/2020' }
+          {y: 49, x:'03/31/2020' },
+          {y: 10, x:'04/01/2020' },
+          {y: 22, x:'04/02/2020' }
         ],
         color: "#ff7a45"
       },
       {
-        Activity: "Weightlifting",
+        id: "Philadelphia",
         data: [
-          {Minutes: 20, Date:'03/31/2020' },
-          {Minutes: 0, Date:'04/01/2020' },
-          {Minutes: 75, Date:'04/02/2020' }
+          {y: 17, x:'03/31/2020' },
+          {y: 43, x:'04/01/2020' },
+          {y: 30, x:'04/02/2020' }
         ],
         color: '#9254de'
       }
-    ]
+    ],
+    dates: {
+      '03/31/2020': true,
+      '04/01/2020': true,
+      '04/02/2020': true,
+    }
+
   };
 
 
@@ -52,46 +57,44 @@ class App extends React.Component {
   };
 
   addData = entry => {
-    let running = this.state.series[0].data;
-    let biking = this.state.series[1].data;
-    let weightlifting = this.state.series[2].data;
-    
-    switch(entry.Activity) {
-      case 'Running': running = running.concat([{Minutes: entry.Minutes, Date: entry.Date}]); running.sort((a,b) => { 
-        let aDate = new Date(a.Date); 
-        let bDate = new Date(b.Date);
-        return aDate - bDate;
-      }); break;
-      case 'Biking': biking = biking.concat([{Minutes: entry.Minutes, Date: entry.Date}]); biking.sort((a,b) => { 
-        let aDate = new Date(a.Date); 
-        let bDate = new Date(b.Date);
-        return aDate - bDate;
-      });break;
-      case 'Weightlifting': weightlifting = weightlifting.concat([{Minutes: entry.Minutes, Date: entry.Date}]); weightlifting.sort((a,b) => { 
-        let aDate = new Date(a.Date); 
-        let bDate = new Date(b.Date);
-        return aDate - bDate;
-      }); break;
-    }
-    this.setState({
-      series: [
-        {
-          Activity: 'Running',
-          data: running,
-          color: '#13c2c2'
-        },
-        {
-          Activity: 'Biking',
-          data: biking,
-          color: "#ff7a45"
-        },
-        {
-          Activity: 'Weightlifting',
-          data: weightlifting,
-          color: '#9254de'
-        }
-      ]
-    }, () => console.log(this.state.series));
+    this.setState(prevState => {
+      const series = prevState.series.map(s => {
+        if (entry.Location == s.id) {
+            const found = false;
+            let updatedData = s.data.map(d => {
+              if (d.x == entry.Date) {
+                found = true;
+                return { y: entry.Orders + d.y, x: d.x };
+              } else {
+                return { y: d.y, x: d.x };
+              }
+            });
+            if (!found) {
+              let i = updatedData.length;
+              let len = updatedData.length;
+              let entryDate = new Date(entry.Date);
+              for (i = len - 1; i >= 0; i --) {
+                let arrDate = new Date(updatedData[i]);
+                if (arrDate > entryDate) {
+                  continue;
+                }
+              }
+              updatedData.splice(i+1, 0, { x: entry.Date, y: entry.Orders });
+            }
+
+            return {
+              id: s.id,
+              color: s.color,
+              data: updatedData
+            }
+        } else {
+          return s;
+        } 
+      });
+      let dates = {...prevState.dates}
+      dates[entry.Date] = true;
+      return { series, dates };
+    }, () => console.log(this.state));
   }
 
 
@@ -99,7 +102,7 @@ class App extends React.Component {
     return (
       <Layout style={{ height: "100vh", backgroundColor: "#f0f5ff" }}>
         <Header>
-          <div className="headerTitle">Fitness Tracker</div>
+          <div className="headerTitle">Delivery Tracker</div>
           <Menu theme="dark" onClick={this.handleMenu} selectedKeys={[this.state.current]} mode="horizontal"
             style={{ lineHeight: "64px"}}>
             <Menu.Item className="selectedClass" key="logger">
@@ -112,6 +115,11 @@ class App extends React.Component {
             History
             <Link to="/history"></Link>
             </Menu.Item>
+            <Menu.Item className="selectedClass" key="locations">
+            <Icon type="dollar" />
+            Orders
+            <Link to="/locations"></Link>
+            </Menu.Item>
             <Menu.Item className="selectedClass" key="about">
             <Icon type="info-circle" />
             About
@@ -123,7 +131,8 @@ class App extends React.Component {
           <Content style={{ backgroundColor: "#f0f5ff" }}>
             <Switch>
                 <Route path="/" exact render={(props) => <Logger {...props} handleSubmit={this.addData}/>} />
-                <Route path="/history" render={(props) => <History {...props} data={this.state.series}/>} />
+                <Route path="/history" render={(props) => <History {...props} data={this.state.series} dates={this.state.dates}/>} />
+                <Route path="/locations" render={(props) => <Locations {...props} data={this.state.series} dates={this.state.dates}/>} />
                 <Route path="/about" component={About} />
             </Switch>
             

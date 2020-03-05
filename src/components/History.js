@@ -1,33 +1,114 @@
-import React from "react";
-import { Text, ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, Label } from 'recharts';
+import React from 'react';
+import { ResponsiveLine } from '@nivo/line';
 
+class History2 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            orderedDates: Object.keys(this.props.dates).sort((a,b) => {
+                let aDate = new Date(a);
+                let bDate = new Date(b);
+                return aDate - bDate;
+            }),
+            length: Object.keys(this.props.dates).length 
+        }
+    }
 
-class History extends React.Component {
     
+
+    componentDidUpdate(prevProps) {
+        if (this.props.dates !== prevProps.dates) {
+            this.setState({
+                orderedDates: Object.keys(this.props.dates).sort((a,b) => {
+                    let aDate = new Date(a);
+                    let bDate = new Date(b);
+                    return aDate - bDate;
+                }),
+                length: Object.keys(this.props.dates).length
+            })
+        }
+    }
+
     render() {
-        console.log(this.props.data);
+        
+        console.log(this.state.orderedDates);
+        console.log(this.state.length);
+        let numTicks = 'every day';
+        let dateRange = new Date(this.state.orderedDates[this.state.length - 1]) - new Date(this.state.orderedDates[0]);
+        dateRange = dateRange / (1000 * 60 * 60 * 24);
+        if (dateRange > 30) {
+            numTicks = 'every 7 days';
+        } else if (dateRange > 7) {
+            numTicks = 'every 2 days';
+        }
+        console.log(dateRange);
         return(
-            <div className="chartContainer">
-            <h3 className="chartTitle">Delivery History</h3>
-            <LineChart width={800} height={320} 
-                margin={{ top: 5, right: 30, left: 30, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="Date" type="category" allowDuplicatedCategory={false}>
-                    <Label value="Date" offset={0} position="bottom" />
-                </XAxis>
-                <YAxis dataKey="Minutes">
-                    <Label value="Minutes" offset={-30} position="left" />
-                </YAxis>
-                <Tooltip />
-                <Legend wrapperStyle={{ padding: "20px 20px 5px 100px" }} />
-                {this.props.data.map(d => (
-                    <Line dataKey="Minutes" data={d.data} name={d.Activity} key={d.Activity} stroke={d.color} />
-                ))}
-            </LineChart>
-            </div>
-            
+                <React.Fragment>
+                <h2 className='chartTitle'>Shipping History</h2>
+                <ResponsiveLine 
+                data={this.props.data}
+                margin={{ top: 20, right: 180, bottom: 100, left: 100 }}
+                xScale={{ type: 'time', format: '%x', domain: [new Date(this.state.orderedDates[0]).getUTCDate, new Date(this.state.orderedDates[this.state.length - 1]).getUTCDate], useUTC: false} }
+                yScale={{ type: 'linear'}}
+                xFormat='time:%x'
+                axisBottom={{
+                    format:'%b %d',
+                    orient: 'bottom',
+                    legend: 'Date',
+                    tickValues: numTicks,
+                    tickPadding: 5,
+                    legendOffset: 40,
+                    legendPosition: 'middle',
+
+                }}
+                axisLeft={{
+                    orient: 'left',
+                    tickSize: 5,
+                    tickPadding: 10,
+                    tickRotation: 0,
+                    legend: 'Number of Orders',
+                    legendOffset: -50,
+                    legendPosition: 'middle',
+                    
+                }}
+                colors={{scheme: 'category10'}}
+                pointSize={16}
+                pointBorderWidth={1}
+                pointBorderColor={{
+                    from: 'color',
+                    modifiers: [['darker', 0.3]],
+                }}
+                
+                legends={[
+                    {
+                        anchor: 'bottom-right',
+                        direction: 'column',
+                        justify: true,
+                        translateX: 120,
+                        translateY: 0,
+                        itemWidth: 100,
+                        itemHeight: 20,
+                        itemOpacity: 0.75,
+                        symbolSize: 12,
+                        symbolShape: 'circle',
+                        symbolBorderColor: 'rgba(0, 0, 0, .5)'
+                    }
+                ]}
+                useMesh={true}
+                enableSlices={false}
+                theme = {{
+                    fontSize: 14,
+                    axis: {
+                    legend: {
+                      text: {
+                          fontSize: 18
+                      }
+                    }
+                  }}}
+            />
+            </React.Fragment>  
         );
     }
 }
 
-export default History;
+export default History2;
