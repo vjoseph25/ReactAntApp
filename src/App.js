@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Icon, Radio } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import { Route, Switch, Link } from 'react-router-dom';
 import Logger from './components/Logger';
 import History from './components/History';
@@ -59,10 +59,10 @@ class App extends React.Component {
   addData = entry => {
     this.setState(prevState => {
       const series = prevState.series.map(s => {
-        if (entry.Location == s.id) {
-            const found = false;
+        if (entry.Location === s.id) {
+            let found = false;
             let updatedData = s.data.map(d => {
-              if (d.x == entry.Date) {
+              if (d.x === entry.Date) {
                 found = true;
                 return { y: entry.Orders + d.y, x: d.x };
               } else {

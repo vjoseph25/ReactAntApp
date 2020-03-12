@@ -33,7 +33,7 @@ class Logger extends React.Component {
     };
 
     render() {
-        const { getFieldDecorator, number, type, object } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         return(
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                 <Form.Item label="Location">
