@@ -48,7 +48,7 @@ class App extends React.Component {
     }
 
   };
-
+  // test comment
 
   handleMenu = e => {
     this.setState({
