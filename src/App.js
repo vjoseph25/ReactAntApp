@@ -74,9 +74,9 @@ class App extends React.Component {
               let len = updatedData.length;
               let entryDate = new Date(entry.Date);
               for (i = len - 1; i >= 0; i --) {
-                let arrDate = new Date(updatedData[i]);
-                if (arrDate > entryDate) {
-                  continue;
+                let arrDate = new Date(updatedData[i].x);
+                if (entryDate > arrDate) {
+                  break;
                 }
               }
               updatedData.splice(i+1, 0, { x: entry.Date, y: entry.Orders });
@@ -94,7 +94,7 @@ class App extends React.Component {
       let dates = {...prevState.dates}
       dates[entry.Date] = true;
       return { series, dates };
-    }, () => console.log(this.state));
+    });
   }
 
 
