@@ -1,9 +1,6 @@
 node {
-    
     stage('Build') {
-        steps {
-            sh 'npm install' 
-            sh 'docker -v'
-        }
+        sh 'npm install' 
+        sh 'docker -v'
     }
 }
