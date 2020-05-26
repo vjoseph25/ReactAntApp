@@ -1,6 +1,11 @@
-node {
-    stage('Build') {
-        sh 'npm install' 
-        sh 'docker -v'
+pipeline {
+    agent {
+        label 'nodejs'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
     }
 }
