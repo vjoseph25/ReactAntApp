@@ -13,6 +13,11 @@ spec:
   # Use service account that can deploy to all namespaces
   serviceAccountName: jenkins-svc
   containers:
+  - name: node
+    image: node:13.8.0-alpine
+    command:
+    - cat
+    tty: true
   - name: docker
     image: docker:latest
     command:
@@ -21,16 +26,6 @@ spec:
     volumeMounts:
     - mountPath: /var/run/docker.sock
       name: docker-sock
-    - name: docker
-    image: docker:latest
-    command:
-    - cat
-    tty: true
-  - name: node
-    image: node:13.8.0-alpine
-    command:
-    - cat
-    tty: true
   volumes:
     - name: docker-sock
       hostPath:
