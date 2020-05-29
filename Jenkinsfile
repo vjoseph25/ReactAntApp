@@ -14,7 +14,7 @@ spec:
   serviceAccountName: default
   containers:
   - name: node
-    image: node:13.8.0-alpine
+    image: node:14.3.0-alpine3.11
     command:
     - cat
     tty: true
