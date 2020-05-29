@@ -7,8 +7,9 @@ pipeline {
 apiVersion: v1
 kind: Pod
 metadata:
-labels:
-  component: ci
+  labels:
+    component: ci
+  namespace: "test"
 spec:
   # Use service account that can deploy to all namespaces
   serviceAccountName: jenkins-svc
