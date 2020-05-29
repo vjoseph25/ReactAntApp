@@ -26,11 +26,7 @@ spec:
     stage('Prepare Code Base') {
       steps {
         container('node') {
-          sh 'cd ..'
-          sh 'ls -l'
-          sh 'cd ..'
-          sh 'ls -l'
-          sh 'cd /home/jenkins/agent/workspace/react-pipeline'
+          sh 'chown -R 1000540000:0 "/.npm"'
           sh 'npm install'
       }
       }
