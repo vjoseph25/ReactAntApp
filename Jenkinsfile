@@ -25,6 +25,7 @@ spec:
     stage('Prepare Code Base') {
       steps {
         container('node') {
+          sh 'npm install npm@6.14.5 -g'
           sh 'npm install'
       }
       }
