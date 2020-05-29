@@ -18,18 +18,6 @@ spec:
     command:
     - cat
     tty: true
-  - name: docker
-    image: docker:latest
-    command:
-    - cat
-    tty: true
-    volumeMounts:
-    - mountPath: /var/run/docker.sock
-      name: docker-sock
-  volumes:
-    - name: docker-sock
-      hostPath:
-        path: /var/run/docker.sock
 """
 }
    }
@@ -39,15 +27,6 @@ spec:
         container('node') {
         sh 'npm install'
       }
-      }
-    }
-    stage('Push') {
-      steps {
-        container('docker') {
-          sh """
-             docker build -t nexus.apps.afs-demo.openshiftpoc.us/repository/docker-hosted/react-ant-app:$BUILD_NUMBER .
-          """
-        }
       }
     }
   }
