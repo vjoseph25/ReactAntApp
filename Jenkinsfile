@@ -9,10 +9,9 @@ kind: Pod
 metadata:
   labels:
     component: ci
-  namespace: "test"
 spec:
   # Use service account that can deploy to all namespaces
-  serviceAccountName: jenkins-svc
+  serviceAccountName: default
   containers:
   - name: node
     image: node:13.8.0-alpine
