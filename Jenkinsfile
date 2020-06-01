@@ -19,8 +19,11 @@ spec:
     - cat
     tty: true
 """
-}
-   }
+    }
+  }
+  environment {
+    HOME = '.'
+  }
    
   stages {
     stage('Prepare Code Base') {
