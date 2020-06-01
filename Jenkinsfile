@@ -21,7 +21,7 @@ spec:
 """
 }
    }
-   tools {nodejs "node"}
+   
   stages {
     stage('Prepare Code Base') {
       steps {
