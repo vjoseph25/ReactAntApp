@@ -26,7 +26,6 @@ spec:
     stage('Prepare Code Base') {
       steps {
         container('node') {
-          sh 'chown -R 1000540000:0 "/.npm"'
           sh 'npm install'
       }
       }
