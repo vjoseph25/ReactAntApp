@@ -14,7 +14,7 @@ spec:
   serviceAccountName: default
   containers:
   - name: node
-    image: node:14.3.0-alpine3.11
+    image: nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs
     command:
     - cat
     tty: true
