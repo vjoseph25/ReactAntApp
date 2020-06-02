@@ -23,6 +23,7 @@ spec:
   }
   environment {
     HOME = '.'
+    CI = true
   }
    
   stages {
