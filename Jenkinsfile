@@ -33,5 +33,13 @@ spec:
       }
       }
     }
+
+    stage('Testing') {
+      steps {
+        container('node') {
+          sh 'npm test'
+      }
+      }
+    }
   }
 }
