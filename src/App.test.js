@@ -23,6 +23,7 @@ test('default path navigates to Logger', () => {
   expect(wrapper.find(History)).toHaveLength(0);
   expect(wrapper.find(About)).toHaveLength(0);
   expect(wrapper.find(Locations)).toHaveLength(0);
+  wrapper.unmount();
 });
 
 test('/history path navigates to History', () => {
@@ -35,6 +36,7 @@ test('/history path navigates to History', () => {
   expect(wrapper.find(History)).toHaveLength(1);
   expect(wrapper.find(About)).toHaveLength(0);
   expect(wrapper.find(Locations)).toHaveLength(0);
+  wrapper.unmount();
 });
 
 test('/locations path navigates to Locations', () => {
@@ -47,6 +49,7 @@ test('/locations path navigates to Locations', () => {
   expect(wrapper.find(History)).toHaveLength(0);
   expect(wrapper.find(About)).toHaveLength(0);
   expect(wrapper.find(Locations)).toHaveLength(1);
+  wrapper.unmount();
 });
 
 test('/about path navigates to About', () => {
@@ -59,6 +62,7 @@ test('/about path navigates to About', () => {
   expect(wrapper.find(History)).toHaveLength(0);
   expect(wrapper.find(About)).toHaveLength(1);
   expect(wrapper.find(Locations)).toHaveLength(0);
+  wrapper.unmount();
 });
 
 test('add to existing date for Richmond', async () => {
@@ -105,9 +109,10 @@ test('add to existing date for Richmond', async () => {
       <App/>
     </MemoryRouter>
   );
-  const addData = wrapper.find(App).instance().addData;
+  let addData = wrapper.find(App).instance().addData;
   await addData({ 'Location': 'Richmond', 'Date': '03/31/2020', 'Orders': 20});
   expect(wrapper.find(App).instance().state).toMatchObject(data);
+  wrapper.unmount();
 });
 
 test('add to existing date for Columbus', async () => {
@@ -154,9 +159,10 @@ test('add to existing date for Columbus', async () => {
       <App/>
     </MemoryRouter>
   );
-  const addData = wrapper.find(App).instance().addData;
+  let addData = wrapper.find(App).instance().addData;
   await addData({ 'Location': 'Columbus', 'Date': '04/01/2020', 'Orders': 20});
   expect(wrapper.find(App).instance().state).toMatchObject(data);
+  wrapper.unmount();
 });
 
 test('add to existing date for Philadelphia', async () => {
@@ -203,9 +209,10 @@ test('add to existing date for Philadelphia', async () => {
       <App/>
     </MemoryRouter>
   );
-  const addData = wrapper.find(App).instance().addData;
+  let addData = wrapper.find(App).instance().addData;
   await addData({ 'Location': 'Philadelphia', 'Date': '04/02/2020', 'Orders': 20});
   expect(wrapper.find(App).instance().state).toMatchObject(data);
+  wrapper.unmount();
 });
 
 test('add to new earlier date for Richmond', async () => {
@@ -254,9 +261,10 @@ test('add to new earlier date for Richmond', async () => {
       <App/>
     </MemoryRouter>
   );
-  const addData = wrapper.find(App).instance().addData;
+  let addData = wrapper.find(App).instance().addData;
   await addData({ 'Location': 'Richmond', 'Date': '02/28/2020', 'Orders': 20});
   expect(wrapper.find(App).instance().state).toMatchObject(data);
+  wrapper.unmount();
 });
 
 test('add to new earlier date for Columbus', async () => {
@@ -305,9 +313,10 @@ test('add to new earlier date for Columbus', async () => {
       <App/>
     </MemoryRouter>
   );
-  const addData = wrapper.find(App).instance().addData;
+  let addData = wrapper.find(App).instance().addData;
   await addData({ 'Location': 'Columbus', 'Date': '02/28/2020', 'Orders': 20});
   expect(wrapper.find(App).instance().state).toMatchObject(data);
+  wrapper.unmount();
 });
 
 test('add to new earlier date for Philadelphia', async () => {
@@ -356,9 +365,10 @@ test('add to new earlier date for Philadelphia', async () => {
       <App/>
     </MemoryRouter>
   );
-  const addData = wrapper.find(App).instance().addData;
+  let addData = wrapper.find(App).instance().addData;
   await addData({ 'Location': 'Philadelphia', 'Date': '02/28/2020', 'Orders': 20});
   expect(wrapper.find(App).instance().state).toMatchObject(data);
+  wrapper.unmount();
 });
 
 test('add to new later date and in between date for Richmond', async () => {
@@ -407,7 +417,7 @@ test('add to new later date and in between date for Richmond', async () => {
       <App/>
     </MemoryRouter>
   );
-  const addData = wrapper.find(App).instance().addData;
+  let addData = wrapper.find(App).instance().addData;
   await addData({ 'Location': 'Richmond', 'Date': '04/15/2020', 'Orders': 20});
   expect(wrapper.find(App).instance().state).toMatchObject(data);
 
@@ -455,4 +465,5 @@ test('add to new later date and in between date for Richmond', async () => {
   };
   await addData({ 'Location': 'Richmond', 'Date': '04/06/2020', 'Orders': 10});
   expect(wrapper.find(App).instance().state).toMatchObject(data);
+  wrapper.unmount();
 });

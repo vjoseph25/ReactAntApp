@@ -31,8 +31,6 @@ class History2 extends React.Component {
 
     render() {
         
-        console.log(this.state.orderedDates);
-        console.log(this.state.length);
         let numTicks = 'every day';
         let dateRange = new Date(this.state.orderedDates[this.state.length - 1]) - new Date(this.state.orderedDates[0]);
         dateRange = dateRange / (1000 * 60 * 60 * 24);
@@ -41,7 +39,6 @@ class History2 extends React.Component {
         } else if (dateRange > 7) {
             numTicks = 'every 2 days';
         }
-        console.log(dateRange);
         return(
                 <React.Fragment>
                 <h2 className='chartTitle'>Shipping History</h2>
