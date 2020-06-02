@@ -18,6 +18,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: buildah
+    image: quay.io/buildah/stable
+    command:
+    - cat
+    tty: true
 """
     }
   }
@@ -41,6 +46,14 @@ spec:
           sh 'npm test'
       }
       }
+    }
+
+    stage('Build container') {
+        steps {
+            container('buildah') {
+                buildah bud -f Dockerfile -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app .
+            }
+        }
     }
   }
 }
