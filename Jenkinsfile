@@ -51,10 +51,7 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'ls'
-                sh 'pwd'
-                sh 'cd ..'
-                sh 'ls'
+                sh 'buildah bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
     }
