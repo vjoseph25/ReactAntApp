@@ -51,7 +51,7 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'buildah bud -f Dockerfile -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app .'
+                sh 'ls'
             }
         }
     }
