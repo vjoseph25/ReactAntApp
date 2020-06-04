@@ -52,6 +52,9 @@ spec:
         steps {
             container('buildah') {
                 sh 'ls'
+                sh 'pwd'
+                sh 'cd ..'
+                sh 'ls'
             }
         }
     }
