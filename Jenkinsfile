@@ -27,7 +27,7 @@ spec:
     }
   }
   environment {
-    HOME = '.'
+    HOME = '/home/jenkins/agent/workspace/react-pipeline'
     CI = true
   }
    
