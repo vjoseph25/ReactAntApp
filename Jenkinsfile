@@ -51,6 +51,7 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
+                sh 'podman system migrate'
                 sh 'buildah bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
