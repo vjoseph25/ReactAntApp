@@ -52,6 +52,7 @@ spec:
         steps {
             container('buildah') {
                 sh 'cat /etc/subuid'
+                sh 'echo $PATH'
                 sh 'buildah --storage-opt fuse-overlayfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
