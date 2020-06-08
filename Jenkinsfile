@@ -55,7 +55,7 @@ spec:
                 sh 'cat /var/lib/containers/storage.conf'
                 sh 'ls /etc/containers'
                 sh 'dnf install fuse3-devel'
-                sh 'buildah --storage-driver overlay --storage-opt ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah --isolation chroot bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
     }
