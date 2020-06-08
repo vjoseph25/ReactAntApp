@@ -52,7 +52,7 @@ spec:
         steps {
             container('buildah') {
                 sh 'cat /etc/containers/storage.conf'
-                sh 'ls /etc/containers'
+                sh 'ls /var/lib/containers/storage'
                 sh 'buildah --storage-driver fuse-overlayfs --storage-opt fuse-overlayfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
