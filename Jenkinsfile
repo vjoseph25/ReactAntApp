@@ -51,8 +51,8 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'buildah top -l user group huser hgroup'
-                sh 'buildah bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'cat /etc/subuid'
+                sh 'buildah bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile --storage-opt ignore_chown_errors'
             }
         }
     }
