@@ -52,7 +52,7 @@ spec:
         steps {
             container('buildah') {
                 sh 'cat /etc/subuid'
-                sh 'buildah --storage-opt ignore_chown_errors bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah --storage-opt overlay.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
     }
