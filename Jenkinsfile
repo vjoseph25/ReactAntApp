@@ -51,7 +51,7 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'buildah --storage-driver vfs --storage-opt vfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah --storage-driver vfs --storage-opt vfs.ignore_chown_errors=true --userns-uid-map 0:1668442479:100000 --userns-gid-map 0:1668442479:100000 bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
     }
