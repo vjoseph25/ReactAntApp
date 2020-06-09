@@ -53,7 +53,7 @@ spec:
             container('buildah') {
                 sh 'cat /etc/containers/storage.conf'
                 sh 'cat /etc/containers/containers.conf'
-                sh 'buildah --storage-driver xfs --storage-opt xfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah --storage-driver vfs --storage-opt vfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
     }
