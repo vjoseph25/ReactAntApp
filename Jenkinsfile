@@ -23,6 +23,13 @@ spec:
     command:
     - cat
     tty: true
+    volumeMounts:
+    - mountPath: /var/lib/containers
+      name: container-folder
+  volumes:
+    - name: container-folder
+      hostPath:
+        path: /var/lib/containers
 """
     }
   }
@@ -51,7 +58,7 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'buildah unshare /home/jenkins/agent/workspace/react-pipeline/make_image.sh'
+                sh 'buildah bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
     }
