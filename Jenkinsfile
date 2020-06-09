@@ -51,7 +51,7 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'buildah unshare make_image.sh'
+                sh 'buildah unshare /home/jenkins/agent/workspace/react-pipeline/make_image.sh'
             }
         }
     }
