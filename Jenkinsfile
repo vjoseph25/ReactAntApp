@@ -23,7 +23,6 @@ spec:
     command:
     - cat
     tty: true
-    
 """
     }
   }
@@ -32,7 +31,7 @@ spec:
     CI = true
   }
    
-  stages {/*
+  stages {
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -47,13 +46,12 @@ spec:
           sh 'npm test'
       }
       }
-    }*/
+    }
 
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'oc whoami'
-                sh 'buildah bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah --storage-driver vfs --storage-opt vfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
             }
         }
     }

@@ -11,6 +11,6 @@ COPY Jenkinsfile /app/
 COPY package.json /app/
 COPY README.md /app/
 
-RUN npm install
+# RUN npm install
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
