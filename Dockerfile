@@ -1,12 +1,12 @@
 FROM nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest
 
 ENV APP_HOME=/app \
-    USER_HOME=/reactjs \
     USER_NAME=reactjs \
     USER_UID=2000
 
-RUN mkdir ${APP_HOME} && mkdir ${USER_HOME}
-RUN useradd -l -u ${USER_UID} -r -g 0 -d ${USER_HOME} -s /sbin/nologin \
+
+WORKDIR /app
+RUN useradd -l -u ${USER_UID} -r -g 0 -s /sbin/nologin \
             -c "${USER_NAME} application user" ${USER_NAME}
 RUN chown -R ${USER_NAME}:0 ${USER_HOME}
 RUN chown -R ${USER_NAME}:0 ${APP_HOME}
@@ -24,7 +24,6 @@ COPY Jenkinsfile /app/
 COPY package.json /app/
 COPY README.md /app/
 
-WORKDIR /app
 RUN npm install
 
 CMD ["npm", "start"]
