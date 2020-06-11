@@ -1,18 +1,15 @@
 FROM nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest
 
 ENV APP_HOME=/app \
-    USER_NAME=reactjs \
-    USER_UID=2000
+    USER_NAME=build \
+    USER_UID=1000 \
+    HOME=/home/build
 
-
-WORKDIR /app
-WORKDIR /reactjs
-RUN useradd -l -u ${USER_UID} -r -g 0 -d /reactjs -s /sbin/nologin \
-            -c "${USER_NAME} application user" ${USER_NAME}
+WORKDIR ${APP_HOME}
 RUN chown -R ${USER_NAME}:0 ${APP_HOME}
 RUN chmod g+rwx ${APP_HOME}
 
-USER reactjs
+USER ${USER_NAME}
 
 COPY __mocks__ /app/__mocks__/
 COPY public /app/public/
@@ -23,7 +20,6 @@ COPY Jenkinsfile /app/
 COPY package.json /app/
 COPY README.md /app/
 
-WORKDIR /app
 RUN npm install
 
 CMD ["npm", "start"]
