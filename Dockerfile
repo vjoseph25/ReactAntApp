@@ -1,4 +1,4 @@
-FROM nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest
+FROM node:14.4.0-alpine3.12
 
 WORKDIR /app
 
