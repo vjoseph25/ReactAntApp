@@ -31,7 +31,7 @@ spec:
     CI = true
   }
    
-  stages {
+  stages {/*
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -46,7 +46,7 @@ spec:
           sh 'npm test'
       }
       }
-    }
+    }*/
 
     stage('Build container') {
         steps {
