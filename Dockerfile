@@ -6,11 +6,10 @@ ENV APP_HOME=/app \
 
 
 WORKDIR /app
-RUN useradd -l -u ${USER_UID} -r -g 0 -s /sbin/nologin \
+WORKDIR /reactjs
+RUN useradd -l -u ${USER_UID} -r -g 0 -d /reactjs -s /sbin/nologin \
             -c "${USER_NAME} application user" ${USER_NAME}
-RUN chown -R ${USER_NAME}:0 ${USER_HOME}
 RUN chown -R ${USER_NAME}:0 ${APP_HOME}
-RUN chmod g+rwx ${USER_HOME}
 RUN chmod g+rwx ${APP_HOME}
 
 USER reactjs
@@ -24,6 +23,7 @@ COPY Jenkinsfile /app/
 COPY package.json /app/
 COPY README.md /app/
 
+WORKDIR /app
 RUN npm install
 
 CMD ["npm", "start"]
