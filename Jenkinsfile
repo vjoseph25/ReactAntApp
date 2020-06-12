@@ -19,7 +19,7 @@ spec:
     - cat
     tty: true
   - name: buildah
-    image: quay.io/buildah/stable
+    image: nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/
     command:
     - cat
     tty: true
