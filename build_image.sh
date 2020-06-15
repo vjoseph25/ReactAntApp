@@ -1,3 +1,5 @@
+#!/bin/bash -e
+
 containerid=$(buildah from nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest)
 buildah run $containerid mkdir -p /user/src/app
 buildah config --workingdir /usr/src/app $containerid
