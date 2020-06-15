@@ -1,4 +1,4 @@
-containerid=$(buildah from node:14.4.0-alpine3.12)
+containerid=$(buildah from nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest)
 buildah run $containerid mkdir -p /user/src/app
 buildah config --workingdir /usr/src/app $containerid
 buildah copy $containerid __mocks__ /usr/src/app/__mocks__/
