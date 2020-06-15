@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-containerid=$(buildah --userns keep-id from nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest)
+containerid=$(buildah --userns host --security-opt seccomp=unconfined --security-opt apparmor=unconfined from nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest)
 buildah run $containerid mkdir -p /user/src/app
 buildah config --workingdir /usr/src/app $containerid
 buildah copy $containerid __mocks__ /usr/src/app/__mocks__/
