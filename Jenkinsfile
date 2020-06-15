@@ -66,8 +66,9 @@ spec:
                 sh 'buildah copy $containerid package.json /usr/src/app/'
                 sh 'buildah copy $containerid README.md /usr/src/app/'
                 sh 'buildah run --net host $containerid npm install'
-                sh 'buildah config --port 3000 --entrypoint '["npm", "start"]' $id'
+                sh 'buildah config --port 3000 --entrypoint \'[\"npm\", \"start\"]\' $id'
                 sh 'buildah commit $id nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app'
+                sh 'buildah images'
             }
         }
     }
