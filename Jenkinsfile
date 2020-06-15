@@ -54,7 +54,7 @@ spec:
                 sh 'whoami'
                 sh 'cat /etc/passwd'
                 //sh 'buildah --userns host --cap-add=CAP_SYS_ADMIN --storage-driver vfs --storage-opt vfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
-                sh 'containerid=$(buildah from nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest)'
+                sh 'containerid=$(buildah from --cap-add=CAP_SYS_ADMIN nexus-docker.apps.afs-demo.openshiftpoc.us/opensource/nodejs:latest)'
                 sh 'buildah run $containerid mkdir -p /user/src/app'
                 sh 'buildah config --workingdir /usr/src/app $containerid'
                 sh 'buildah copy $containerid __mocks__ /usr/src/app/__mocks__/'
