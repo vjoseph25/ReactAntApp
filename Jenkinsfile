@@ -52,7 +52,7 @@ spec:
         steps {
             container('podman') {
                 //sh 'buildah --userns host --cap-add=CAP_SYS_ADMIN --storage-driver vfs --storage-opt vfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
-                sh 'podman build --storage-driver vfs --security-opt seccomp=unconfined --security-opt apparmor=unconfined --isolation chroot -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline'
+                sh 'podman build --storage-driver vfs --security-opt seccomp=/usr/share/containers/seccomp.json --isolation chroot -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline'
                 sh 'podman images'
             }
         }
