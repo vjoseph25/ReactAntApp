@@ -23,8 +23,6 @@ spec:
     command:
     - cat
     tty: true
-    securityContext:
-      privileged: true
 """
     }
   }
