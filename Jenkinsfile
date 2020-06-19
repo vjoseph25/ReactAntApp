@@ -23,6 +23,8 @@ spec:
     command:
     - cat
     tty: true
+    securityContext:
+      privileged: true
 """
     }
   }
@@ -52,7 +54,7 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'buildah --isolation chroot --cap-add CAP_SYS_ADMIN --device /dev/fuse --storage-driver=overlay --storage-opt "overlay.mount_program=/usr/bin/fuse-overlayfs" --net=host --security-opt seccomp=unconfined bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah --isolation chroot --cap-add CAP_SYS_ADMIN --storage-driver=overlay --storage-opt "overlay.mount_program=/usr/bin/fuse-overlayfs" --net=host --security-opt seccomp=unconfined bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
                 sh 'ls'
                 //sh 'podman build --isolation chroot --cap-add CAP_SYS_ADMIN --cgroup-manager=cgroupfs --storage-driver=vfs --net=host --security-opt seccomp=unconfined --security-opt label=disabled -t podman-react /home/jenkins/agent/workspace/react-pipeline'
                 //sh 'podman login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW docker.io'
