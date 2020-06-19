@@ -18,11 +18,13 @@ spec:
     command:
     - cat
     tty: true
-  - name: podman
-    image: quay.io/podman/stable
+  - name: buildah
+    image: quay.io/buildah/stable
     command:
     - cat
     tty: true
+    securityContext:
+      privileged: true
 """
     }
   }
@@ -52,12 +54,12 @@ spec:
     stage('Build container') {
         steps {
             container('podman') {
-                //sh 'buildah --userns host --cap-add=CAP_SYS_ADMIN --storage-driver vfs --storage-opt vfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah --userns host --cap-add=CAP_SYS_ADMIN --storage-driver vfs --storage-opt vfs.ignore_chown_errors=true bud -t nexus-docker.apps.afs-demo.openshiftpoc.us/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
                 sh 'ls'
-                sh 'podman build --isolation chroot --cap-add CAP_SYS_ADMIN --cgroup-manager=cgroupfs --storage-driver=vfs --net=host --security-opt seccomp=unconfined --security-opt label=disabled -t podman-react /home/jenkins/agent/workspace/react-pipeline'
-                sh 'podman login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW docker.io'
-                sh 'podman push podman-react docker://docker.io/vjoseph25/podman-react'
-                sh 'podman images'
+                //sh 'podman build --isolation chroot --cap-add CAP_SYS_ADMIN --cgroup-manager=cgroupfs --storage-driver=vfs --net=host --security-opt seccomp=unconfined --security-opt label=disabled -t podman-react /home/jenkins/agent/workspace/react-pipeline'
+                //sh 'podman login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW docker.io'
+                //sh 'podman push podman-react docker://docker.io/vjoseph25/podman-react'
+                sh 'buildah images'
             }
         }
     }
