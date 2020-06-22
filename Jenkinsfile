@@ -65,5 +65,12 @@ spec:
             }
         }
     }
+
+    stage('Aqua scanning') {
+      steps {
+        aquaMicroscanner imageName: 'buildah-react', notCompliesCmd: 'exit 1', onDisallowed: 'fail'
+      }
+      
+    }
   }
 }
