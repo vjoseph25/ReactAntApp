@@ -54,14 +54,14 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'buildah bud -t podman-react /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah bud -t buildah-react /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
                 sh 'ls'
                 //sh 'podman build --isolation chroot --cap-add CAP_SYS_ADMIN --cgroup-manager=cgroupfs --storage-driver=vfs --net=host --security-opt seccomp=unconfined --security-opt label=disabled -t podman-react /home/jenkins/agent/workspace/react-pipeline'
                 //sh 'podman login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW docker.io'
                 //sh 'podman push podman-react docker://docker.io/vjoseph25/podman-react'
                 sh 'buildah images'
                 sh 'buildah login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW docker.io'
-                sh 'buildah push podman-react docker://docker.io/vjoseph25/podman-react'
+                sh 'buildah push buildah-react docker://docker.io/vjoseph25/buildah-react'
             }
         }
     }
