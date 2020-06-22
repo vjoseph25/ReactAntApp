@@ -61,7 +61,6 @@ spec:
                 //sh 'podman push podman-react docker://docker.io/vjoseph25/podman-react'
                 sh 'buildah images'
                 sh 'buildah login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW docker.io'
-                sh 'buildah push buildah-react docker://docker.io/vjoseph25/buildah-react'
             }
         }
     }
@@ -70,7 +69,14 @@ spec:
       steps {
         aquaMicroscanner imageName: 'buildah-react', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html'
       }
-      
+    }
+
+    stage('Push container') {
+      steps {
+        container('buildah') {
+          sh 'buildah push buildah-react docker://docker.io/vjoseph25/buildah-react'
+        }
+      }
     }
   }
 }
