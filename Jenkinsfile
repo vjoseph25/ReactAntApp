@@ -25,6 +25,11 @@ spec:
     tty: true
     securityContext:
       privileged: true
+  - name: aqua
+    image: localhost/aqua-security/aqua-security/scanner
+    command:
+    - cat
+    tty: true
 """
     }
   }
@@ -34,7 +39,7 @@ spec:
     DOCKER_CREDS = credentials('docker-credentials')
   }
    
-  stages {/*
+  stages {
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -49,7 +54,7 @@ spec:
           sh 'npm test'
       }
       }
-    }*/
+    }
 
     stage('Build container') {
         steps {
@@ -64,12 +69,14 @@ spec:
             }
         }
     }
-
+/*
     stage('Aqua scanning') {
       steps {
-        aquaMicroscanner imageName: 'buildah-react', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html'
+        container('aqua') {
+
+        }
       }
-    }
+    }*/
 
     stage('Push container') {
       steps {
