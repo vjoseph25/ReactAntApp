@@ -26,7 +26,7 @@ spec:
     securityContext:
       privileged: true
   - name: aqua
-    image: localhost/aqua-security/aqua-security/scanner
+    image: localhost/aqua-security/aqua-security/scanner:4.6.0
     command:
     - cat
     tty: true
