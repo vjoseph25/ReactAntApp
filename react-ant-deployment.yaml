@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    namespace: cicd-demo
+    name: react-ant-app
+spec:
+    selector:
+        matchLabels:
+            app: react-ant-app
+    template:
+        metadata:
+            labels:
+                app: react-ant-app
+        spec:        
+            containers:
+              - image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app:latest
+                name: react-ant-app
+                ports:
+                    - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: react-ant-app-svc
+spec:
+    selector:
+        app: react-ant-app
+    ports:
+        - protocol: TCP
+          port: 3000
+          targetPort: 3000
+          name: react-ant-app-port
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+    name: react-ant-app
+    namespace: cicd-demo
+spec:
+    host: react-ant-app.apps.afsopenshiftdemo.afsopenshiftdemo.us
+    to:
+    kind: Service
+    name: react-ant-app-svc
+    weight: 100
+    port:
+    targetPort: react-ant-app-port
+    tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+    wildcardPolicy: None
+    
