@@ -47,5 +47,5 @@ spec:
     tls:
         termination: edge
         insecureEdgeTerminationPolicy: Redirect
-        wildcardPolicy: None
+    wildcardPolicy: None
     
