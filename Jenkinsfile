@@ -34,7 +34,7 @@ spec:
     NEXUS_CREDS = credentials('nexus')
   }
   
-  stages {/*
+  stages {
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -63,14 +63,14 @@ spec:
             }
         }
     }
-
+    /*
     stage('Aqua scanning') {
       steps {
         container('aqua') {
 
         }
       }
-    }
+    }*/
 
     stage('Push container') {
       steps {
@@ -79,14 +79,14 @@ spec:
           sh 'buildah push cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app'
         }
       }
-    }*/
-
+    }
+    /*
     stage('Deploy container') {
       steps {
         kubeconfig(credentialsId: 'serviceaccount-token', serverUrl: 'https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443') {
           sh 'kubectl get pods'
         }
       }
-    }
+    }*/
   }
 }
