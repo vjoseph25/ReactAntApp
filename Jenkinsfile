@@ -91,7 +91,7 @@ spec:
       steps {
         container('kubectl') {
           withKubeConfig([credentialsId: 'serviceaccount-token', serverUrl: 'https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443']) {
-            sh 'kubectl get pods'
+            sh 'kubectl apply -f react-ant-deployment.yaml'
           }
         }
       }
