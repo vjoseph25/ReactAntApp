@@ -33,8 +33,8 @@ spec:
     CI = true
     NEXUS_CREDS = credentials('nexus')
   }
-  /* 
-  stages {
+  
+  stages {/*
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -81,9 +81,10 @@ spec:
       }
     }*/
 
-  stage('Deploy container') {
-     steps {
-         sh 'kubectl get pods'
-     }
+    stage('Deploy container') {
+      steps {
+          sh 'kubectl get pods'
+      }
+    }
   }
 }
