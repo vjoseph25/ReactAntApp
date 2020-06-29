@@ -39,13 +39,13 @@ metadata:
 spec:
     host: react-ant-app.apps.afsopenshiftdemo.afsopenshiftdemo.us
     to:
-    kind: Service
-    name: react-ant-app-svc
-    weight: 100
+        kind: Service
+        name: react-ant-app-svc
+        weight: 100
     port:
-    targetPort: react-ant-app-port
+        targetPort: react-ant-app-port
     tls:
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
-    wildcardPolicy: None
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
+        wildcardPolicy: None
     
