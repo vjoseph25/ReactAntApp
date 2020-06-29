@@ -83,7 +83,7 @@ spec:
 
     stage('Deploy container') {
       steps {
-        withKubeConfig([credentialsId: 'system:serviceaccount:cicd-demo:default', serverUrl: 'https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443']) {
+        withKubeConfig([credentialsId: 'serviceaccount-token', serverUrl: 'https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443']) {
         sh 'kubectl get pods'
         }
       }
