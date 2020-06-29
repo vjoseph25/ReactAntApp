@@ -25,6 +25,11 @@ spec:
     tty: true
     securityContext:
       privileged: true
+  - name: kubectl
+    image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/kubectl:1.17.5
+    command:
+    - cat
+    tty: true
 """
     }
   }
@@ -84,8 +89,10 @@ spec:
     */
     stage('Deploy container') {
       steps {
-        kubeconfig(caCertificate: $TLS_CRT, credentialsId: 'serviceaccount-token', serverUrl: 'https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443') {
-          sh 'kubectl get pods'
+        container('kubectl') {
+          withKubeConfig([credentialsId: 'serviceaccount-token', serverUrl: 'https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443']) {
+            sh 'kubectl get pods'
+          }
         }
       }
     }
