@@ -40,7 +40,7 @@ spec:
   }
   
   stages {
-    /*
+    
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -69,24 +69,24 @@ spec:
             }
         }
     }
-    
+    /*
     stage('Aqua scanning') {
       steps {
         container('aqua') {
 
         }
       }
-    }
+    }*/
 
     stage('Push container') {
       steps {
         container('buildah') {
           sh 'buildah login -u $NEXUS_CREDS_USR -p $NEXUS_CREDS_PSW cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us'
-          sh 'buildah push cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app'
+          sh 'buildah push --format=docker cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app'
         }
       }
     }
-    */
+    
     stage('Deploy container') {
       steps {
         container('kubectl') {
