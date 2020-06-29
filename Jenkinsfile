@@ -35,6 +35,7 @@ spec:
   }
   
   stages {
+    /*
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -63,14 +64,14 @@ spec:
             }
         }
     }
-    /*
+    
     stage('Aqua scanning') {
       steps {
         container('aqua') {
 
         }
       }
-    }*/
+    }
 
     stage('Push container') {
       steps {
@@ -80,13 +81,13 @@ spec:
         }
       }
     }
-    /*
+    */
     stage('Deploy container') {
       steps {
-        kubeconfig(credentialsId: 'serviceaccount-token', serverUrl: 'https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443') {
+        kubeconfig(caCertificate: $TLS_CRT, credentialsId: 'serviceaccount-token', serverUrl: 'https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443') {
           sh 'kubectl get pods'
         }
       }
-    }*/
+    }
   }
 }
