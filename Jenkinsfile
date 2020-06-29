@@ -30,6 +30,18 @@ spec:
     command:
     - cat
     tty: true
+  - name: falco-driver-loader
+    image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/falco-driver-loader:0.23.0
+    command:
+    - cat
+    tty: true
+    securityContext:
+      privileged: true
+  - name: falco-no-driver
+    image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/falco-no-driver:0.23.0
+    command:
+    - cat
+    tty: true
 """
     }
   }
@@ -40,7 +52,7 @@ spec:
   }
   
   stages {
-    
+    /*
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -69,15 +81,15 @@ spec:
             }
         }
     }
-    /*
-    stage('Aqua scanning') {
+    */
+    stage('Sysdig falco scan') {
       steps {
-        container('aqua') {
-
+        container('falco-no-driver') {
+          sh 'falco --help'
         }
       }
-    }*/
-
+    }
+    /*
     stage('Push container') {
       steps {
         container('buildah') {
@@ -95,6 +107,6 @@ spec:
           }
         }
       }
-    }
+    }*/
   }
 }
