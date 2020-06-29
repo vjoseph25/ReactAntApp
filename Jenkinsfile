@@ -81,10 +81,9 @@ spec:
       }
     }*/
 
-    stage('Deploy container') {
-      steps {
-          sh 'kubectl get pods'
-      }
-    }
+  stage('Deploy container') {
+     steps {
+         sh 'kubectl get pods'
+     }
   }
 }
