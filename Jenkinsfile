@@ -72,7 +72,7 @@ spec:
     */
     stage('Sysdig falco scan') {
       steps {
-        sh 'anchore engineCredentialsId: \'anchore\', engineurl: \'http://10.128.2.150:8228/v1\', name: \'anchore_images\''
+        anchore engineCredentialsId: 'anchore', engineurl: 'http://10.128.2.150:8228/v1', name: 'anchore_images'
       }
     }
     /*
