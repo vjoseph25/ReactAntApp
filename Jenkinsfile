@@ -55,6 +55,8 @@ spec:
       name: usr-fs
   - name: falco-no-driver
     image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/falco-no-driver:0.23.0
+    command:
+    - cat
     tty: true
   volumes:
   - hostPath:
