@@ -125,9 +125,11 @@ volumes:
     }
     */
     stage('Sysdig falco scan') {
+      steps {
         container('falco-no-driver') {
           sh 'falco --help'
         }
+      }
     }
     /*
     stage('Push container') {
