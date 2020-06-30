@@ -70,13 +70,6 @@ spec:
         }
     }
     
-    /*
-    stage('Anchore') {
-      steps {
-        anchore engineCredentialsId: 'anchore', engineurl: 'http://10.129.2.63:8228/v1', name: 'anchore_images'
-      }
-    }*/
-    
     stage('Push container') {
       steps {
         container('buildah') {
@@ -94,6 +87,12 @@ spec:
           }
         }
       }
-    }*/
+    }
+
+    stage('Anchore') {
+      steps {
+        anchore engineCredentialsId: 'anchore', engineurl: 'http://10.129.2.63:8228/v1', name: 'anchore_images'
+      }
+    }
   }
 }
