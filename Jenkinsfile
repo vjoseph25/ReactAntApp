@@ -130,9 +130,7 @@ spec:
     */
     stage('Sysdig falco scan') {
       steps {
-        container('falco-no-driver') {
-          sh 'falco --help'
-        }
+        sh 'anchore engineCredentialsId: \'anchore\', engineurl: \'http://10.128.2.150:8228/v1\', name: \'cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app\''
       }
     }
     /*
