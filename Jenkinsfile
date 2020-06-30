@@ -40,7 +40,7 @@ spec:
   }
   
   stages {
-    /*
+    
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -60,7 +60,7 @@ spec:
     stage('Build container') {
         steps {
             container('buildah') {
-                sh 'buildah bud -t cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
+                sh 'buildah bud -t cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app:1.0 /home/jenkins/agent/workspace/react-pipeline/Dockerfile'
                 sh 'ls'
                 //sh 'podman build --isolation chroot --cap-add CAP_SYS_ADMIN --cgroup-manager=cgroupfs --storage-driver=vfs --net=host --security-opt seccomp=unconfined --security-opt label=disabled -t podman-react /home/jenkins/agent/workspace/react-pipeline'
                 //sh 'podman login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW docker.io'
@@ -69,18 +69,19 @@ spec:
             }
         }
     }
-    */
+    
+    /*
     stage('Anchore') {
       steps {
         anchore engineCredentialsId: 'anchore', engineurl: 'http://10.129.2.63:8228/v1', name: 'anchore_images'
       }
-    }
-    /*
+    }*/
+    
     stage('Push container') {
       steps {
         container('buildah') {
           sh 'buildah login -u $NEXUS_CREDS_USR -p $NEXUS_CREDS_PSW cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us'
-          sh 'buildah push --format=docker cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app'
+          sh 'buildah push --format=docker cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app:1.0'
         }
       }
     }
