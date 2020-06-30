@@ -13,7 +13,7 @@ spec:
                 app: react-ant-app
         spec:        
             containers:
-              - image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app:latest
+              - image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/apps/react-ant-app:1.0
                 name: react-ant-app
                 ports:
                     - containerPort: 3000
