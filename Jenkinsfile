@@ -30,60 +30,6 @@ spec:
     command:
     - cat
     tty: true
-  - name: falco-driver-loader
-    image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/falco-driver-loader:0.23.0
-    command:
-    - cat
-    tty: true
-    securityContext:
-      privileged: true
-    volumeMounts:
-    - mountPath: /root/.falco
-      name: root
-    - mountPath: /host/etc
-      name: etc-fs
-      readOnly: true
-    - mountPath: /host/proc
-      name: proc-fs
-      readOnly: true
-    - mountPath: /host/boot
-      name: boot-fs
-      readOnly: true
-    - mountPath: /host/lib/modules
-      name: lib-modules
-    - mountPath: /host/usr
-      name: usr-fs
-  - name: falco-no-driver
-    image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/falco-no-driver:0.23.0
-    command:
-    - cat
-    tty: true
-volumes:
-- hostPath:
-    path: /proc
-    type: ""
-  name: proc-fs
-- hostPath:
-    path: /boot
-    type: ""
-  name: boot-fs
-- hostPath:
-    path: /lib/modules
-    type: ""
-  name: lib-modules
-- hostPath:
-    path: /usr
-    type: ""
-  name: usr-fs
-- hostPath:
-    path: /etc
-    type: ""
-  name: etc-fs
-- hostPath:
-    path: /root/.falco
-    type: ""
-  name: root
-
 """
     }
   }
@@ -124,11 +70,9 @@ volumes:
         }
     }
     */
-    stage('Sysdig falco scan') {
+    stage('Anchore') {
       steps {
-        container('falco-no-driver') {
-          sh 'falco --help'
-        }
+        anchore engineCredentialsId: 'anchore', engineurl: 'http://10.129.2.63:8228/v1', name: 'anchore_images'
       }
     }
     /*
