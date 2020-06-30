@@ -53,10 +53,15 @@ spec:
       name: lib-modules
     - mountPath: /host/usr
       name: usr-fs
-  - name: falco-no-driver
+  - args:
+    - /usr/bin/falco
+    - -K
+    - eyJhbGciOiJSUzI1NiIsImtpZCI6ImJwdERzUFdtamFUUTNuWHJJaEtPcThmM3ZYZDhiejdIS0F0TUNCc0pqV0kifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJjaWNkLWRlbW8iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiZGVmYXVsdC10b2tlbi0yZ3NmZyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNmVhMzQ2NGYtOTI5Ny00YTQwLWI0ZDctZjI3YWY3M2Q4NTE0Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmNpY2QtZGVtbzpkZWZhdWx0In0.jKUo2tUwID9a9HUvVxRCN4hcxte0VfaKLK09eo9-O9Y2EGiutUcyfWmGwWc3VrN7QtNycQjjaoh6S7Hu36ATUHXWcQYDLHlfLH7RqvztvfloU_FlEsLZXpXcui1-zaaU6OjDPn1MUv595KrfbZ5RZASN4_zffbcS9FOXY6i2L8Wtg4SaHHTtD8SDtEoJ4NDrtpZ1H1uOyQPFs0e5uOh1kVwRmYJR33yqQ0Norw_O-j-z2fC7cnLWcBVJ17F-36hpciNONSK7ew9vD9tvhmd8a7C3L6ZLNApm6mm9EPrlw4PdhfCKuuoyK4Emby4iLNHa_qDn5vRgPYdPwR1_1s5nXg
+    - -k
+    - https://api.afsopenshiftdemo.afsopenshiftdemo.us:6443
+    - -pk
+    name: falco-no-driver
     image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/falco-no-driver:0.23.0
-    command:
-    - cat
     tty: true
   volumes:
   - hostPath:
@@ -83,7 +88,6 @@ spec:
       path: /root/.falco
       type: ""
     name: root
-
 """
     }
   }
