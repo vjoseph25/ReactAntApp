@@ -32,6 +32,8 @@ spec:
     tty: true
   - name: falco-driver-loader
     image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/falco-driver-loader:0.23.0
+    command:
+    - cat
     tty: true
     securityContext:
       privileged: true
