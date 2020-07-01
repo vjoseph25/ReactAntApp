@@ -36,7 +36,7 @@ class Logger extends React.Component {
         const { getFieldDecorator } = this.props.form;
         return(
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                <Form.Item label="Location">
+                <Form.Item label="Lockation">
                     {getFieldDecorator('Location', {
                         rules: [{ required: true, message: "Please select a location!"}]
                     })(
