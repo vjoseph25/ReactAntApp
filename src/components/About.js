@@ -1,7 +1,7 @@
 import React from "react";
 import warehouse from './warehouse.jpg';
 
-
+//comment
 function About() {
     return (
         <div>
