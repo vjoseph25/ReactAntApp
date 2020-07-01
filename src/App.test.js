@@ -13,6 +13,23 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() })
 
+beforeEach(() => {
+  //add Object before tests to resolve TypeError: window.matchMedia is not a function
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // deprecated
+      removeListener: jest.fn(), // deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
+});
+
 test('default path navigates to Logger', () => {
   const wrapper = mount(
     <MemoryRouter initialEntries={[ '/' ]}>

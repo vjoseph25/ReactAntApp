@@ -51,6 +51,7 @@ section .ant-layout {
 .headerTitle {
   width: 120px;
   float: left;
+  color: white;
 }
 
 .App-header {

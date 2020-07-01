@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu} from 'antd';
+import { ReadOutlined, HistoryOutlined, DollarOutlined, InfoCircleOutlined} from '@ant-design/icons'
 import { Route, Switch, Link } from 'react-router-dom';
 import Logger from './components/Logger';
 import History from './components/History';
@@ -106,22 +107,22 @@ class App extends React.Component {
           <Menu theme="dark" onClick={this.handleMenu} selectedKeys={[this.state.current]} mode="horizontal"
             style={{ lineHeight: "64px"}}>
             <Menu.Item className="selectedClass" key="logger">
-              <Icon type="read" />
+              <ReadOutlined />
               Logger
               <Link to="/"></Link>
             </Menu.Item>
             <Menu.Item className="selectedClass" key="history">
-            <Icon type="history" />
+            <HistoryOutlined />
             History
             <Link to="/history"></Link>
             </Menu.Item>
             <Menu.Item className="selectedClass" key="locations">
-            <Icon type="dollar" />
+            <DollarOutlined />
             Orders
             <Link to="/locations"></Link>
             </Menu.Item>
             <Menu.Item className="selectedClass" key="about">
-            <Icon type="info-circle" />
+            <InfoCircleOutlined />
             About
             <Link to="/about"></Link>
             </Menu.Item>
