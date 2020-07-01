@@ -16,6 +16,7 @@ const formItemLayout = {
 class Logger extends React.Component {
     formRef = React.createRef();
     handleSubmit = e => {
+        console.log(e);
         e.preventDefault();
         this.props.form.validateFields((err, fieldsValue) => {
             if (err) {
