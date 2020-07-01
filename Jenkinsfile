@@ -81,7 +81,7 @@ spec:
     
     stage('Anchore') {
       steps {
-        anchore engineCredentialsId: 'anchore', engineRetries: '500', engineurl: 'http://10.129.2.63:8228/v1', name: 'anchore_images'
+        anchore engineCredentialsId: 'anchore', engineRetries: '600', engineurl: 'http://10.129.2.63:8228/v1', name: 'anchore_images'
       }
     }
 
