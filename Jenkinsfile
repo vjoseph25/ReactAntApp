@@ -18,6 +18,10 @@ spec:
     command:
     - cat
     tty: true
+  - name: openjdk
+    image: openjdk:17
+    command:
+    - cat
   #- name: buildah
   #  image: quay.io/buildah/stable
   #  command:
@@ -41,7 +45,7 @@ spec:
   }
   
   stages {
-    
+    /*
     stage('Prepare Code Base') {
       steps {
         container('node') {
@@ -49,7 +53,7 @@ spec:
       }
       }
     }
-  /*
+  
     stage('Testing') {
       steps {
         container('node') {
@@ -98,7 +102,7 @@ spec:
 
     stage('SonarQube analysis') {
         steps {
-            container('node') {
+            container('openjdk') {
                 withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name  
                     sh 'echo ${scannerHome}'
                     sh '${scannerHome}/bin/sonar-scanner --version'
