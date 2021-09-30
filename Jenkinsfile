@@ -18,18 +18,18 @@ spec:
     command:
     - cat
     tty: true
-  - name: buildah
-    image: quay.io/buildah/stable
-    command:
-    - cat
-    tty: true
-    securityContext:
-      privileged: true
-  - name: kubectl
-    image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/kubectl:1.17.5
-    command:
-    - cat
-    tty: true
+  #- name: buildah
+  #  image: quay.io/buildah/stable
+  #  command:
+  #  - cat
+  #  tty: true
+  #  securityContext:
+  #    privileged: true
+  #- name: kubectl
+  #  image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/kubectl:1.17.5
+  #  command:
+  #  - cat
+  #  tty: true
 """
     }
   }
@@ -48,7 +48,7 @@ spec:
       }
       }
     }
-
+  /*
     stage('Testing') {
       steps {
         container('node') {
@@ -93,6 +93,17 @@ spec:
           }
         }
       }
+    }*/
+
+    stage('SonarQube analysis') {
+        steps {
+            container('node') {
+                sh 'ls'
+                withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name
+                    sh "sonar-scanner"
+                }
+            }
+        }
     }
   }
 }
