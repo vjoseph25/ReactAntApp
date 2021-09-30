@@ -37,6 +37,7 @@ spec:
     HOME = '/home/jenkins/agent/workspace/react-pipeline'
     CI = true
     NEXUS_CREDS = credentials('nexus')
+    scannerHome = tool 'sonar'
   }
   
   stages {
@@ -97,7 +98,6 @@ spec:
 
     stage('SonarQube analysis') {
         steps {
-            def scannerHome = tool 'sonar';
             container('node') {
                 withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name  
                     sh 'echo ${scannerHome}'
