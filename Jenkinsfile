@@ -100,7 +100,7 @@ spec:
             container('node') {
                 withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name
                     sh 'echo ${scannerHome}'
-                    sh '{scannerHome}/bin/sonar-scanner --version'
+                    sh '${scannerHome}/bin/sonar-scanner --version'
                 }
             }
         }
