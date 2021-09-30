@@ -38,7 +38,7 @@ spec:
     }
   }
   environment {
-    HOME = '/home/jenkins/agent/workspace/react-pipeline'
+    HOME = '/home/jenkins/agent/workspace/test'
     CI = true
     NEXUS_CREDS = credentials('nexus')
     scannerHome = tool 'sonar'
