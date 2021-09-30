@@ -99,6 +99,7 @@ spec:
         steps {
             container('node') {
                 withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name
+                    def scannerHome = tool 'sonar';
                     sh 'echo ${scannerHome}'
                     sh '${scannerHome}/bin/sonar-scanner --version'
                 }
