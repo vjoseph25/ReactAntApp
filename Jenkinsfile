@@ -10,7 +10,7 @@ metadata:
     component: ci
 spec:
   # Use service account that can deploy to all namespaces
-  serviceAccountName: system:serviceaccount:jenkins:jenkins-jenkins-helm
+  serviceAccountName: jenkins-jenkins-helm
   containers:
   - name: node
     image: node:14.4.0-alpine3.12
