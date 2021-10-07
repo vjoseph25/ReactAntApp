@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      defaultContainer 'openjdk:11'
+      defaulContainer 'openjdk'
       yaml """
 apiVersion: v1
 kind: Pod
@@ -31,7 +31,7 @@ spec:
 
       stage('SonarQube analysis') {
           steps {
-              container('jnlp') {
+              container('openjdk') {
                   withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name  
                       sh 'echo ${scannerHome}'
                       sh '${scannerHome}/bin/sonar-scanner --version'
