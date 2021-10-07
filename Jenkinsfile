@@ -3,8 +3,6 @@ pipeline {
     kubernetes {
       inheritFrom 'jnlp'
       yaml """
-apiVersion: v1
-kind: Pod
 spec:
   # Use service account that can deploy to all namespaces
   serviceAccountName: jenkins-jenkins-helm
