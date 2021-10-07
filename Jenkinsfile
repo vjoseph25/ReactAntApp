@@ -1,7 +1,8 @@
 pipeline {
   agent {
     kubernetes {
-      defaultContainer 'jnlp'
+      inheritFrom 'jnlp'
+      yamlMergeStrategy 'merge'
       yaml """
 apiVersion: v1
 kind: Pod
@@ -18,18 +19,6 @@ spec:
     image: openjdk:11
     command:
     - cat
-  #- name: buildah
-  #  image: quay.io/buildah/stable
-  #  command:
-  #  - cat
-  #  tty: true
-  #  securityContext:
-  #    privileged: true
-  #- name: kubectl
-  #  image: cicd-demo-nexus-docker.apps.afsopenshiftdemo.afsopenshiftdemo.us/repository/nexus-docker/opensource/kubectl:1.17.5
-  #  command:
-  #  - cat
-  #  tty: true
 """
     }
   }
