@@ -2,6 +2,7 @@ pipeline {
   agent {
     kubernetes {
       label 'linux-x86_64'
+      inheritFrom 'jnlp'
       yaml """
 apiVersion: v1
 kind: Pod
