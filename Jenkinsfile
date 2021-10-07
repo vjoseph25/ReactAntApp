@@ -18,7 +18,7 @@ spec:
     - cat
     tty: true
   - name: openjdk
-    image: openjdk:17
+    image: openjdk:11
     command:
     - cat
   #- name: buildah
