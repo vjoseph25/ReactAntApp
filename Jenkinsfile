@@ -2,7 +2,7 @@ pipeline {
   agent {
     kubernetes {
       inheritFrom 'jnlp'
-      yamlMergeStrategy 'merge'
+      yamlMergeStrategy 'merge()'
       yaml """
 apiVersion: v1
 kind: Pod
