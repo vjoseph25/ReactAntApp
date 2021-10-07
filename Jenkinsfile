@@ -39,7 +39,6 @@ spec:
     NEXUS_CREDS = credentials('nexus')
     scannerHome = tool 'sonar'
   }
-  node('jnlp') {
     stages {
 
       stage('SonarQube analysis') {
@@ -53,6 +52,5 @@ spec:
           }
       }
     }
-  }
   
 }
