@@ -2,6 +2,7 @@ pipeline {
   agent {
     kubernetes {
       inheritFrom 'linux-x86_64'
+      yamlMergeStrategy merge()
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
