@@ -39,7 +39,10 @@ spec:
                       sh 'ls'
                       sh '${scannerHome}/bin/sonar-scanner \
                       -Dsonar.projectKey=react-ant-app \
-                      -Dsonar.sources=./src/**/*.js'
+                      -Dsonar.sources=./src/components,./src/App.css,./src/App.js, \
+                      ./src/index.css,./src/index.js,./src/logo.svg, \
+                      ./src/serviceWorker.js,./src/setupTests.js \
+                      -Dsonar.tests=./src/__tests__/App.test.js'
                   }
               }
           }
