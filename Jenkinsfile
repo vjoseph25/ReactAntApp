@@ -1,7 +1,6 @@
 pipeline {
   agent {
     kubernetes {
-      label 'linux-x86_64'
       inheritFrom 'jnlp'
       yamlMergeStrategy merge()
       yaml """
