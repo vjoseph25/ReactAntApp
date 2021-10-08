@@ -36,10 +36,10 @@ spec:
           steps {
               container('jnlp') {
                   withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name  
-                      sh 'echo ${scannerHome}'
+                      sh 'ls'
                       sh '${scannerHome}/bin/sonar-scanner \
                       -Dsonar.projectKey=react-ant-app \
-                      -Dsonar.sources=/src/**/*.js'
+                      -Dsonar.sources=./src/**/*.js'
                   }
               }
           }
