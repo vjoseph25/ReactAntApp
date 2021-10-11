@@ -1,17 +1,12 @@
 pipeline {
   agent {
     kubernetes {
-      label 'linux-x86_64'
-      inheritFrom 'jnlp'
       defaultContainer 'jnlp'
       yamlMergeStrategy merge()
       yaml """
 apiVersion: v1
 kind: Pod
 name: jenkins-agent
-metadata:
-  labels:
-    jenkins/label: linux-x86_64
 spec:
   # Use service account that can deploy to all namespaces
   serviceAccountName: jenkins-jenkins-helm
