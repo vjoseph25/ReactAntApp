@@ -3,7 +3,6 @@ pipeline {
     kubernetes {
       label 'linux-x86_64'
       inheritFrom 'jnlp'
-      defaultContainer 'jnlp'
       yamlMergeStrategy merge()
       yaml """
 apiVersion: v1
